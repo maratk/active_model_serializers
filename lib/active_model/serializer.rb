@@ -229,15 +229,18 @@ module ActiveModel
     # Returns a json representation of the serializable
     # object including the root.
     def as_json(options={})
-      if root = options.fetch(:root, @options.fetch(:root, _root))
+      h = if root = options.fetch(:root, @options.fetch(:root, _root))
+          p 'true'
         @options[:hash] = hash = {}
         @options[:unique_values] = {}
 
         hash.merge!(root => serializable_hash)
         hash
       else
+          p 'false'
         serializable_hash
       end
+      h.merge(:'_links' => '', :'_embedded' => '')
     end
 
     # Returns a hash representation of the serializable
