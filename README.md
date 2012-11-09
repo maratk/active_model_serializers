@@ -1,5 +1,19 @@
 [![Build Status](https://secure.travis-ci.org/josevalim/active_model_serializers.png)](http://travis-ci.org/josevalim/active_model_serializers)
 
+# TODO List
+
+1. links:
+1a add route helper to models?
+1b generate via REST basing on class name
+1c configs for serializers to use other link types (except routes)
+1c1 pagination - ?
+1c2 templated links
+1c3 admin links - ?
+
+2. embedded: recursive
+
+3. config options for JSON/HAL+JSON
+
 # Purpose
 
 The purpose of `ActiveModel::Serializers` is to provide an object to
@@ -34,7 +48,7 @@ The easiest way to create a new serializer is to generate a new resource, which
 will generate a serializer at the same time:
 
 ```
-$ rails g resource post title:string body:string 
+$ rails g resource post title:string body:string
 ```
 
 This will generate a serializer in `app/serializers/post_serializer.rb` for
@@ -64,7 +78,7 @@ end
 ```
 
 In this case, Rails will look for a serializer named `PostSerializer`, and if
-it exists, use it to serialize the `Post`. 
+it exists, use it to serialize the `Post`.
 
 This also works with `respond_with`, which uses `to_json` under the hood. Also
 note that any options passed to `render :json` will be passed to your
@@ -386,7 +400,7 @@ Alternatively, you can choose to embed only the ids or the associated objects pe
 ```ruby
 class PostSerializer < ActiveModel::Serializer
   attributes :id, :title, :body
-  
+
   has_many :comments, embed: :objects
   has_many :tags, embed: :ids
 end
